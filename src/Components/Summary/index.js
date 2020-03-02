@@ -1,0 +1,58 @@
+import React from 'react';
+
+import PropTypes from 'prop-types';
+
+import './style.css';
+
+import Profile from './Profile';
+
+const formatDate = value => {
+  if (!value) return;
+  const date = new Date(value);
+  if (isNaN(date)) {
+    return 'Invalid Date';
+  }
+  if (date === 'Invalid Date') {
+    return 'Invalid Date';
+  }
+  if (value.length < 10) {
+    return 'Invalid Date';
+  }
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (month < 10) {
+    month = '0' + month;
+  }
+  return `${year}-${month}-${day}`;
+};
+
+const Summary = ({ profile }) => {
+  return profile
+    ? <div className={'profile profile-striped'}>
+        <Profile name={'ID'} value={profile.id} />
+        <Profile name={'Type'} value={profile.type} />
+        <Profile
+          name={'Site Admin'}
+          value={Boolean(profile.site_admin) ? 'Yes' : 'No'}
+        />
+        <Profile name={'Website'} value={profile.blog} />
+        <Profile name={'Location'} value={profile.location} />
+        <Profile name={'Email'} value={profile.email} />
+        <Profile name={'Bio'} value={profile.bio} />
+        <Profile name={'Public Repository'} value={profile.public_repos} />
+        <Profile name={'Public Gists'} value={profile.public_gists} />
+        <Profile name={'Date Created'} value={formatDate(profile.created_at)} />
+        <Profile name={'Date Updated'} value={formatDate(profile.updated_at)} />
+      </div>
+    : <div>no profile data</div>;
+};
+
+Summary.propTypes = {
+  profile: PropTypes.object.isRequired,
+};
+
+export default Summary;
