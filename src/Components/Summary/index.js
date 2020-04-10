@@ -31,23 +31,26 @@ const formatDate = value => {
 };
 
 const Summary = ({ profile }) => {
+
+  const website = profile.blog ? profile.blog : '#';
+  const anchor = <a href={website}> Blog</a>;
   return profile
     ? <div className={'profile profile-striped'}>
-        <Profile name={'ID'} value={profile.id} />
-        <Profile name={'Type'} value={profile.type} />
-        <Profile
-          name={'Site Admin'}
-          value={Boolean(profile.site_admin) ? 'Yes' : 'No'}
-        />
-        <Profile name={'Website'} value={profile.blog} />
-        <Profile name={'Location'} value={profile.location} />
-        <Profile name={'Email'} value={profile.email} />
-        <Profile name={'Bio'} value={profile.bio} />
-        <Profile name={'Public Repository'} value={profile.public_repos} />
-        <Profile name={'Public Gists'} value={profile.public_gists} />
-        <Profile name={'Date Created'} value={formatDate(profile.created_at)} />
-        <Profile name={'Date Updated'} value={formatDate(profile.updated_at)} />
-      </div>
+      <Profile name={'ID'} value={profile.id} />
+      <Profile name={'Type'} value={profile.type} />
+      <Profile
+        name={'Site Admin'}
+        value={Boolean(profile.site_admin) ? 'Yes' : 'No'}
+      />
+      <Profile name={'Website'} value={anchor} />
+      <Profile name={'Location'} value={profile.location} />
+      <Profile name={'Email'} value={profile.email} />
+      <Profile name={'Bio'} value={profile.bio} />
+      <Profile name={'Public Repository'} value={profile.public_repos} />
+      <Profile name={'Public Gists'} value={profile.public_gists} />
+      <Profile name={'Date Created'} value={formatDate(profile.created_at)} />
+      <Profile name={'Date Updated'} value={formatDate(profile.updated_at)} />
+    </div>
     : <div>no profile data</div>;
 };
 

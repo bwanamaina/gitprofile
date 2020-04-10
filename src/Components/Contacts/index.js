@@ -6,7 +6,7 @@ import './style.css';
 
 const Contacts = ({ name }) => {
   return (
-    <div className={'contact'}>
+    <div className={'contact'} style={{ cursor: 'pointer' }}>
       <span style={{ textAlign: 'center' }} className={'purple'}>
         {name}
       </span>
