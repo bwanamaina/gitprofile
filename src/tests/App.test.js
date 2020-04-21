@@ -14,6 +14,8 @@ import Avatar from '../Components/Avatar';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+// it's good to trust our code but let's verify :(
+
 describe('GitHub <App/>', () => {
   it('complete app renders without crashing', () => {
     const div = window.document.createElement('div');
@@ -43,6 +45,7 @@ describe('GitHub <App/>', () => {
 
   /**
    * this works with class-based-components
+   * i'll explore more...
    */
   it('change the profile loading state', () => {
     // const wrapper = mount(<Profile />);
