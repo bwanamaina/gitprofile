@@ -17,14 +17,16 @@ const Profile = () => {
 
   const [loading, setLoading] = useState(true);
 
+  // call github users api on componentDidMount()
+  // using hooks
   useEffect(() => {
     fetch('https://api.github.com/users/bwanamaina')
-      .then(response => response.json())
-      .then(response => {
+      .then((response) => response.json())
+      .then((response) => {
         setProfile(response);
         setLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         setError(error);
         setLoading(false);
       });
@@ -32,17 +34,17 @@ const Profile = () => {
 
   return (
     <React.Fragment>
-      {error
-        ? <div>
-          {error.message}
-        </div>
-        : <Router>
-          {loading
-            ? <div>loading...</div>
-            : <React.Fragment>
+      {error ? (
+        <div>{error.message}</div>
+      ) : (
+        <Router>
+          {loading ? (
+            <div>loading...</div>
+          ) : (
+            <React.Fragment>
               <div className={'column left'}>
                 <Avatar source={profile.avatar_url} />
-                <Link to="/" style={{ textDecoration: 'none' }}>
+                <Link to='/' style={{ textDecoration: 'none' }}>
                   <Contacts name={profile.name} />
                 </Link>
                 <Connection
@@ -54,15 +56,30 @@ const Profile = () => {
                 <Switch>
                   <Route
                     exact
-                    path="/"
-                    children={props => <Summary profile={profile} />}
+                    path='/'
+                    children={(props) => <Summary profile={profile} />}
                   />
-                  <Route path="/followers" children={() => <Members url={profile.followers_url} />} />
-                  <Route path="/following" children={() => <Members url={String(profile.following_url).replace('{/other_user}', '')} />} />
+                  <Route
+                    path='/followers'
+                    children={() => <Members url={profile.followers_url} />}
+                  />
+                  <Route
+                    path='/following'
+                    children={() => (
+                      <Members
+                        url={String(profile.following_url).replace(
+                          '{/other_user}',
+                          ''
+                        )}
+                      />
+                    )}
+                  />
                 </Switch>
               </div>
-            </React.Fragment>}
-        </Router>}
+            </React.Fragment>
+          )}
+        </Router>
+      )}
     </React.Fragment>
   );
 };

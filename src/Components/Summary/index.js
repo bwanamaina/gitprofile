@@ -6,7 +6,13 @@ import './style.css';
 
 import Profile from './Profile';
 
-const formatDate = value => {
+/**
+ * @description Formats date object to human readable format
+ * i didn't want to use the packages
+ * @param {String} value date string
+ * @returns String
+ */
+const formatDate = (value) => {
   if (!value) return;
   const date = new Date(value);
   if (isNaN(date)) {
@@ -31,11 +37,10 @@ const formatDate = value => {
 };
 
 const Summary = ({ profile }) => {
-
   const website = profile.blog ? profile.blog : '#';
   const anchor = <a href={website}> Blog</a>;
-  return profile
-    ? <div className={'profile profile-striped'}>
+  return profile ? (
+    <div className={'profile profile-striped'}>
       <Profile name={'ID'} value={profile.id} />
       <Profile name={'Type'} value={profile.type} />
       <Profile
@@ -51,7 +56,9 @@ const Summary = ({ profile }) => {
       <Profile name={'Date Created'} value={formatDate(profile.created_at)} />
       <Profile name={'Date Updated'} value={formatDate(profile.updated_at)} />
     </div>
-    : <div>no profile data</div>;
+  ) : (
+    <div>no profile data</div>
+  );
 };
 
 Summary.propTypes = {
